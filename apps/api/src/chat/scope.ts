@@ -24,6 +24,16 @@ const ORDINALS: Record<string, number> = {
   tenth: 10,
 };
 
+const GENERIC_COMPANY_WORDS = new Set([
+  'the',
+  'global',
+  'digital',
+  'united',
+  'american',
+  'british',
+  'international',
+]);
+
 const STOP_TITLES = new Set(['engineer', 'developer', 'manager', 'senior', 'job', 'role']);
 
 function escape(s: string): string {
@@ -50,10 +60,19 @@ export function mentionedNumbers(question: string, maxNumber: number): number[] 
   return [...found].sort((a, b) => a - b);
 }
 
+export function companyAliases(company: string | null): string[] {
+  const full = company?.trim().toLowerCase();
+  if (!full || full.length < 3) return [];
+  const first = full.split(/\s+/)[0]!;
+  return first !== full && first.length >= 4 && !GENERIC_COMPANY_WORDS.has(first)
+    ? [full, first]
+    : [full];
+}
+
 function mentionsJob(question: string, job: JobRef): boolean {
   const q = question.toLowerCase();
-  const company = job.company?.trim().toLowerCase();
-  if (company && company.length >= 3 && new RegExp(`\\b${escape(company)}\\b`).test(q)) return true;
+  if (companyAliases(job.company).some((alias) => new RegExp(`\\b${escape(alias)}\\b`).test(q)))
+    return true;
   const title = job.title.trim().toLowerCase();
   return title.length >= 6 && !STOP_TITLES.has(title) && q.includes(title);
 }

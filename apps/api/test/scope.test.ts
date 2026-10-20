@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { mentionedNumbers, resolveScope, type JobRef } from '../src/chat/scope.js';
+import { companyAliases, mentionedNumbers, resolveScope, type JobRef } from '../src/chat/scope.js';
 
 const jobs: JobRef[] = [
   { id: 'a', number: 1, title: 'Staff Platform Engineer', company: 'Northwind' },
@@ -30,6 +30,17 @@ describe('resolveScope', () => {
 
   it('matches company names', () => {
     expect(resolveScope('Am I a good fit for Acme?', jobs).jobs.map((j) => j.number)).toEqual([2]);
+  });
+
+  it('matches a company by its first word', () => {
+    const named = [{ id: 'x', number: 4, title: 'Platform Lead', company: 'Northwind Logistics' }];
+    expect(
+      resolveScope('Does Northwind care about Kafka?', named).jobs.map((j) => j.number),
+    ).toEqual([4]);
+  });
+
+  it('ignores generic leading company words', () => {
+    expect(companyAliases('Global Payments Inc')).toEqual(['global payments inc']);
   });
 
   it('matches titles', () => {
