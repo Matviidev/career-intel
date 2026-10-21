@@ -61,7 +61,7 @@ export class FakeLlm implements Llm {
     const must = findSkills(required);
     return {
       title: firstLine(text),
-      company: /at ([A-Z][\w]+)/.exec(text)?.[1] ?? '',
+      company: /(?:\bat|—)\s+([A-Z]\w+(?: [A-Z]\w+)*)/.exec(firstLine(text))?.[1] ?? '',
       seniority: /senior/i.test(text) ? 'senior' : 'unknown',
       minYearsExperience: Number(/(\d+)\+?\s+years/i.exec(text)?.[1] ?? 0) || null,
       mustHaveSkills: must,
