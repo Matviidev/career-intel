@@ -1,48 +1,52 @@
 @import 'tailwindcss';
-@import '@fontsource-variable/inter';
-@import '@fontsource/instrument-serif';
-@import '@fontsource-variable/jetbrains-mono';
+@import '@fontsource-variable/fraunces/full.css';
+@import '@fontsource-variable/bricolage-grotesque';
+@import '@fontsource/dm-mono/400.css';
+@import '@fontsource/dm-mono/500.css';
 
 @custom-variant dark (@media (prefers-color-scheme: dark));
 
+/* Plum & apricot: deep plum ink on warm cream, apricot as the spark. */
 :root {
-  --paper: #f4f1ea;
-  --surface: #fffdf8;
-  --sunken: #ece7dc;
-  --ink: #1b1f1d;
-  --muted: #6a6e68;
-  --line: #e0d9cb;
-  --accent: #1f4d3f;
-  --accent-ink: #f6f3ec;
-  --accent-soft: #e2ebe4;
-  --gold: #c58a1f;
-  --match: #2f7a55;
-  --match-soft: #e1efe6;
-  --partial: #a86d10;
-  --partial-soft: #f6ead2;
-  --miss: #b0442d;
-  --miss-soft: #f6e1da;
+  --paper: #f7f2ec;
+  --surface: #fffcf7;
+  --sunken: #efe7df;
+  --ink: #2a1d33;
+  --muted: #6f6377;
+  --line: #e6dcd3;
+  --accent: #5b2a86;
+  --accent-ink: #fbf6ff;
+  --accent-soft: #ece2f5;
+  --gold: #f0874a;
+  --match: #1d7a6a;
+  --match-soft: #dcefea;
+  --partial: #a9630a;
+  --partial-soft: #f8e8d0;
+  --miss: #c03a5b;
+  --miss-soft: #f8e0e5;
+  --glow: rgb(240 135 74 / 0.12);
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: #101311;
-    --surface: #171b19;
-    --sunken: #0c0e0d;
-    --ink: #ebe7dd;
-    --muted: #979d95;
-    --line: #29302c;
-    --accent: #86cfaa;
-    --accent-ink: #0f1a15;
-    --accent-soft: #1c2b24;
-    --gold: #e3b257;
-    --match: #7dcca0;
-    --match-soft: #19291f;
-    --partial: #e5b25d;
-    --partial-soft: #2c2415;
-    --miss: #ec8b74;
-    --miss-soft: #301c17;
+    --paper: #15101b;
+    --surface: #1d1725;
+    --sunken: #100c15;
+    --ink: #f1eaf6;
+    --muted: #a69cb1;
+    --line: #2f2739;
+    --accent: #c9a6f4;
+    --accent-ink: #1b1026;
+    --accent-soft: #2b2139;
+    --gold: #ffa771;
+    --match: #6fd4bf;
+    --match-soft: #142d29;
+    --partial: #f1bb5c;
+    --partial-soft: #32260f;
+    --miss: #ff8ea7;
+    --miss-soft: #391a24;
+    --glow: rgb(201 166 244 / 0.08);
     color-scheme: dark;
   }
 }
@@ -64,9 +68,9 @@
   --color-partial-soft: var(--partial-soft);
   --color-miss: var(--miss);
   --color-miss-soft: var(--miss-soft);
-  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
-  --font-serif: 'Instrument Serif', ui-serif, Georgia, serif;
-  --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+  --font-sans: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Fraunces Variable', ui-serif, Georgia, serif;
+  --font-mono: 'DM Mono', ui-monospace, monospace;
 }
 
 html,
@@ -76,14 +80,26 @@ body,
 }
 
 body {
-  background: var(--paper);
+  background: radial-gradient(60rem 40rem at 100% -10%, var(--glow), transparent 70%), var(--paper);
+  background-attachment: fixed;
   color: var(--ink);
   font-family: var(--font-sans);
+  font-optical-sizing: auto;
   -webkit-font-smoothing: antialiased;
 }
 
+/* Soft, slightly wonky Fraunces for display type. */
+.font-serif {
+  font-variation-settings:
+    'SOFT' 100,
+    'WONK' 1;
+  font-weight: 450;
+  letter-spacing: -0.01em;
+}
+
 ::selection {
-  background: var(--accent-soft);
+  background: var(--gold);
+  color: var(--accent-ink);
 }
 
 .prose-answer {
@@ -95,7 +111,11 @@ body {
 .prose-answer h1,
 .prose-answer h2,
 .prose-answer h3 {
-  font-weight: 600;
+  font-family: var(--font-serif);
+  font-variation-settings:
+    'SOFT' 100,
+    'WONK' 1;
+  font-weight: 560;
   margin-top: 1.1em;
 }
 .prose-answer ul {
@@ -144,6 +164,7 @@ body {
   height: 1em;
   margin-left: 2px;
   vertical-align: -0.15em;
-  background: var(--accent);
+  background: var(--gold);
+  border-radius: 2px;
   animation: caret 1s steps(1) infinite;
 }
