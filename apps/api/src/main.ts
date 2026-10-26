@@ -7,6 +7,7 @@ import { FakeEmbedder } from './embeddings/fake.js';
 import { LocalEmbedder } from './embeddings/local.js';
 import { AnthropicLlm } from './llm/anthropic.js';
 import { FakeLlm } from './llm/fake.js';
+import { OpenAiLlm } from './llm/openai.js';
 import type { Llm } from './llm/llm.js';
 
 const config = loadConfig();
@@ -15,12 +16,19 @@ const { db, close } = createDb(config.DATABASE_URL);
 const llm: Llm =
   config.LLM_PROVIDER === 'fake'
     ? new FakeLlm()
-    : new AnthropicLlm({
-        apiKey: config.ANTHROPIC_API_KEY,
-        model: config.LLM_MODEL,
-        extractionEffort: config.LLM_EXTRACTION_EFFORT,
-        chatEffort: config.LLM_CHAT_EFFORT,
-      });
+    : config.LLM_PROVIDER === 'openai'
+      ? new OpenAiLlm({
+          baseUrl: config.OPENAI_BASE_URL,
+          apiKey: config.OPENAI_API_KEY,
+          model: config.LLM_MODEL,
+          fallbackModels: config.LLM_FALLBACK_MODELS,
+        })
+      : new AnthropicLlm({
+          apiKey: config.ANTHROPIC_API_KEY,
+          model: config.LLM_MODEL,
+          extractionEffort: config.LLM_EXTRACTION_EFFORT,
+          chatEffort: config.LLM_CHAT_EFFORT,
+        });
 
 const local =
   config.EMBEDDINGS_PROVIDER === 'local'

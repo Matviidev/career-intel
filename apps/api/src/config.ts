@@ -7,9 +7,20 @@ const schema = z.object({
   LOG_LEVEL: z.string().default('info'),
   DATABASE_URL: z.string().default('postgres://career:career@localhost:5432/career'),
   CORS_ORIGIN: z.string().default('http://localhost:5173'),
-  LLM_PROVIDER: z.enum(['anthropic', 'fake']).default('anthropic'),
+  LLM_PROVIDER: z.enum(['anthropic', 'openai', 'fake']).default('anthropic'),
   ANTHROPIC_API_KEY: z.string().optional(),
   LLM_MODEL: z.string().default('claude-opus-5-5'),
+  LLM_FALLBACK_MODELS: z
+    .string()
+    .default('')
+    .transform((v) =>
+      v
+        .split(',')
+        .map((m) => m.trim())
+        .filter(Boolean),
+    ),
+  OPENAI_BASE_URL: z.string().default('https://openrouter.ai/api/v1'),
+  OPENAI_API_KEY: z.string().optional(),
   LLM_EXTRACTION_EFFORT: z.enum(['low', 'medium', 'high']).default('low'),
   LLM_CHAT_EFFORT: z.enum(['low', 'medium', 'high']).default('medium'),
   EMBEDDINGS_PROVIDER: z.enum(['local', 'fake']).default('local'),

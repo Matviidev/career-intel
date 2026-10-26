@@ -16,6 +16,8 @@ Then upload `samples/resume-alex-morgan.md` and the postings in `samples/jobs/`.
 
 No API key? Set `LLM_PROVIDER=fake` to run the app end to end with a deterministic stand-in model.
 
+Any OpenAI-compatible API works too: set `LLM_PROVIDER=openai`, `OPENAI_API_KEY`, `LLM_MODEL` and optionally `OPENAI_BASE_URL` (defaults to OpenRouter) and `LLM_FALLBACK_MODELS`. The demo runs on free OpenRouter models, e.g. `nvidia/nemotron-3.5-super-vl:free`.
+
 ## Local development
 
 ```bash
