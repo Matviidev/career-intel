@@ -48,7 +48,7 @@ export function SourcesPanel({
             )}
           >
             <div className="mb-1.5 flex items-center gap-2 text-xs">
-              <span className="rounded bg-accent px-1.5 py-0.5 font-mono text-[10px] font-semibold text-accent-ink">
+              <span className="rounded bg-accent px-1.5 py-0.5 text-[10px] font-semibold text-accent-ink">
                 {s.label}
               </span>
               <span className="truncate font-medium">

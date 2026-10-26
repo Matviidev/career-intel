@@ -6,7 +6,7 @@ function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-lg bg-sunken px-3 py-2">
       <p className="text-[10px] tracking-wide text-muted uppercase">{label}</p>
-      <p className="font-mono text-sm tabular-nums">{value}</p>
+      <p className="text-sm tabular-nums">{value}</p>
     </div>
   );
 }
@@ -39,7 +39,7 @@ export function TracePanel({ message }: { message: ChatMessage | undefined }) {
       </div>
       <div>
         <SectionLabel>Model & scope</SectionLabel>
-        <p className="font-mono text-xs">{data.model}</p>
+        <p className="text-xs">{data.model}</p>
         <p className="mt-1 text-xs text-muted">
           {data.scope.length
             ? `Jobs ${data.scope.map((n) => `#${n}`).join(', ')}`
@@ -54,7 +54,7 @@ export function TracePanel({ message }: { message: ChatMessage | undefined }) {
             {data.flags.map((f) => (
               <li
                 key={f}
-                className="rounded-md bg-partial-soft px-2 py-0.5 font-mono text-[11px] text-partial"
+                className="rounded-md bg-partial-soft px-2 py-0.5 text-[11px] text-partial"
               >
                 {f}
               </li>
@@ -76,11 +76,11 @@ export function TracePanel({ message }: { message: ChatMessage | undefined }) {
               <th className="py-1 text-right font-medium">Score</th>
             </tr>
           </thead>
-          <tbody className="font-mono tabular-nums">
+          <tbody className="tabular-nums">
             {data.retrieved.map((r) => (
               <tr key={r.label} className="border-t border-line">
                 <td className="py-1">{r.label}</td>
-                <td className="truncate py-1 font-sans">{r.section}</td>
+                <td className="truncate py-1">{r.section}</td>
                 <td className="py-1 text-right">{r.vectorRank ?? '—'}</td>
                 <td className="py-1 text-right">{r.keywordRank ?? '—'}</td>
                 <td className="py-1 text-right">{r.score.toFixed(4)}</td>

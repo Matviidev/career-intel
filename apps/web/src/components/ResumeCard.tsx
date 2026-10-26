@@ -31,7 +31,7 @@ export function ResumeCard({ resume }: { resume: Resume | null | undefined }) {
   return (
     <div className="rounded-xl border border-line bg-surface p-4">
       <div className="flex items-start gap-3">
-        <div className="grid size-10 shrink-0 place-items-center rounded-full bg-accent font-serif text-lg text-accent-ink">
+        <div className="grid size-10 shrink-0 place-items-center rounded-full bg-accent text-lg font-semibold text-accent-ink">
           {(profile.name || 'You').slice(0, 1)}
         </div>
         <div className="min-w-0 flex-1">
@@ -63,7 +63,7 @@ export function ResumeCard({ resume }: { resume: Resume | null | undefined }) {
         ))}
         {extra > 0 && <li className="px-1 py-0.5 text-[11px] text-muted">+{extra} more</li>}
       </ul>
-      <p className="mt-3 truncate font-mono text-[10px] text-muted">{resume.sourceName}</p>
+      <p className="mt-3 truncate text-[10px] text-muted">{resume.sourceName}</p>
       <input
         ref={replaceRef}
         type="file"

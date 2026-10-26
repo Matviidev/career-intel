@@ -27,7 +27,7 @@ function Step({ n, done, children }: { n: number; done: boolean; children: strin
     <li className="flex items-center gap-3">
       <span
         className={clsx(
-          'grid size-6 place-items-center rounded-full font-mono text-xs',
+          'grid size-6 place-items-center rounded-full text-xs',
           done ? 'bg-accent text-accent-ink' : 'border border-line text-muted',
         )}
       >
@@ -52,7 +52,7 @@ export function EmptyState({
       <p className="text-xs font-semibold tracking-[0.14em] text-accent uppercase">
         Career intelligence
       </p>
-      <h1 className="mt-3 font-serif text-4xl leading-[1.05] sm:text-5xl">
+      <h1 className="mt-3 text-4xl leading-[1.05] font-semibold tracking-tight sm:text-5xl">
         Know exactly where you stand <em className="text-accent">before</em> you apply.
       </h1>
       <p className="mt-4 max-w-lg text-muted">

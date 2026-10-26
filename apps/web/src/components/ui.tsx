@@ -62,7 +62,7 @@ export function JobBadge({ number, className }: { number: number; className?: st
   return (
     <span
       className={clsx(
-        'inline-flex h-5 min-w-7 items-center justify-center rounded-md bg-sunken px-1.5 font-mono text-[11px] font-semibold text-ink',
+        'inline-flex h-5 min-w-7 items-center justify-center rounded-md bg-sunken px-1.5 text-[11px] font-semibold text-ink',
         className,
       )}
     >

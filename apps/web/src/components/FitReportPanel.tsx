@@ -63,7 +63,7 @@ function Bar({ label, value, weight }: { label: string; value: number; weight: s
         <span>
           {label} <span className="text-muted">· {weight}</span>
         </span>
-        <span className="font-mono tabular-nums">{Math.round(value * 100)}%</span>
+        <span className="tabular-nums">{Math.round(value * 100)}%</span>
       </div>
       <div className="h-1.5 overflow-hidden rounded-full bg-sunken">
         <div
@@ -153,7 +153,7 @@ export function FitReportPanel({
             <span className="text-xs text-muted capitalize">{job.profile.seniority}</span>
           )}
         </div>
-        <h2 className="mt-2 font-serif text-2xl leading-tight">{job.title}</h2>
+        <h2 className="mt-2 text-2xl leading-tight font-semibold tracking-tight">{job.title}</h2>
         <p className="text-sm text-muted">{job.company ?? 'Company not stated'}</p>
         {job.profile.summary && (
           <p className="mt-2 text-sm leading-relaxed">{job.profile.summary}</p>
@@ -185,7 +185,7 @@ export function FitReportPanel({
           Original posting
         </button>
         {showPosting && (
-          <pre className="mt-2 max-h-96 overflow-auto rounded-lg bg-sunken p-3 font-sans text-xs leading-relaxed whitespace-pre-wrap">
+          <pre className="mt-2 max-h-96 overflow-auto rounded-lg bg-sunken p-3 text-xs leading-relaxed whitespace-pre-wrap">
             {job.content}
           </pre>
         )}
