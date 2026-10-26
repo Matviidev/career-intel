@@ -16,7 +16,9 @@ export const chatRoutes: FastifyPluginAsync = async (base) => {
 
   app.post('/chat', { schema: { body: chatBody } }, async (req, reply) => {
     const abort = new AbortController();
-    req.raw.on('close', () => abort.abort());
+    reply.raw.on('close', () => {
+      if (!reply.raw.writableFinished) abort.abort();
+    });
 
     const write = (event: string, data: unknown) => {
       reply.raw.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`);
